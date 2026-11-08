@@ -1,0 +1,273 @@
+{
+  "name": "geo-map-viewer",
+  "displayName": "GeoJSON Viewer, KML Viewer & GPX Viewer (Map Preview, Shapefile)",
+  "description": "GeoJSON viewer, KML viewer and GPX viewer with a map preview in VS Code. Also opens shapefiles (SHP, zipped), KMZ, TopoJSON, WKT and CSV with lat/lon: feature table, properties, GPX distance and elevation profile, reprojection from .prj, PNG export. Free, no sign-in, works offline.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1B1F2E",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=18"
+  },
+  "categories": [
+    "Visualization",
+    "Data Science",
+    "Other"
+  ],
+  "keywords": [
+    "geojson viewer",
+    "kml viewer",
+    "gpx viewer",
+    "map preview",
+    "shapefile viewer",
+    "shp viewer",
+    "topojson",
+    "geojson",
+    "kml",
+    "kmz",
+    "gpx",
+    "shapefile",
+    "shp",
+    "wkt",
+    "map",
+    "gis",
+    "geospatial",
+    "gps track",
+    "elevation profile",
+    "leaflet",
+    "offline map",
+    "geojson preview",
+    "kml preview",
+    "coordinates",
+    "epsg",
+    "proj4",
+    "csv map",
+    "remote ssh",
+    "wsl",
+    "offline"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "geoMapViewer.map",
+        "displayName": "Map Viewer (GeoJSON, KML, GPX, Shapefile)",
+        "selector": [
+          {
+            "filenamePattern": "*.gpx"
+          },
+          {
+            "filenamePattern": "*.kmz"
+          },
+          {
+            "filenamePattern": "*.shp"
+          },
+          {
+            "filenamePattern": "*.topojson"
+          }
+        ],
+        "priority": "default"
+      },
+      {
+        "viewType": "geoMapViewer.mapOption",
+        "displayName": "Map Viewer (GeoJSON, KML, GPX, Shapefile)",
+        "selector": [
+          {
+            "filenamePattern": "*.geojson"
+          },
+          {
+            "filenamePattern": "*.kml"
+          },
+          {
+            "filenamePattern": "*.wkt"
+          },
+          {
+            "filenamePattern": "*.json"
+          },
+          {
+            "filenamePattern": "*.csv"
+          },
+          {
+            "filenamePattern": "*.tsv"
+          },
+          {
+            "filenamePattern": "*.zip"
+          }
+        ],
+        "priority": "option"
+      }
+    ],
+    "commands": [
+      {
+        "command": "geoMapViewer.openToSide",
+        "title": "Open Map Preview to the Side",
+        "category": "Map Viewer",
+        "icon": "$(map)"
+      },
+      {
+        "command": "geoMapViewer.openWith",
+        "title": "Open in Map Viewer",
+        "category": "Map Viewer"
+      },
+      {
+        "command": "geoMapViewer.openWalkthrough",
+        "title": "Get Started",
+        "category": "Map Viewer"
+      },
+      {
+        "command": "geoMapViewer.supportDeveloper",
+        "title": "Support the developer",
+        "category": "Map Viewer"
+      },
+      {
+        "command": "geoMapViewer.moreViewers",
+        "title": "More free viewers",
+        "category": "Map Viewer"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "geoMapViewer.openToSide",
+          "when": "resourceExtname =~ /^\\.(geojson|topojson|kml|gpx|wkt)$/i && activeEditor == workbench.editors.files.textFileEditor",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "geoMapViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(geojson|json|topojson|kml|kmz|gpx|shp|zip|wkt|csv|tsv)$/i",
+          "group": "navigation@9"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "geoMapViewer.openToSide",
+          "when": "resourceExtname =~ /^\\.(geojson|json|topojson|kml|kmz|gpx|shp|zip|wkt|csv|tsv)$/i"
+        },
+        {
+          "command": "geoMapViewer.openWith",
+          "when": "resourceExtname =~ /^\\.(geojson|json|topojson|kml|kmz|gpx|shp|zip|wkt|csv|tsv)$/i"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Map Viewer",
+      "properties": {
+        "geoMapViewer.maxFileMB": {
+          "type": "number",
+          "default": 512,
+          "minimum": 1,
+          "maximum": 2048,
+          "description": "Files up to this size are opened. Larger files show a message and are not read."
+        },
+        "geoMapViewer.basemap": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the offline basemap (Natural Earth countries and lakes, shipped with the extension) under the data. The toolbar can change it per tab."
+        },
+        "geoMapViewer.livePreview": {
+          "type": "boolean",
+          "default": true,
+          "description": "Redraw the map while you edit the file in a text editor (text files up to 20 MB). Saved changes always reload the map."
+        },
+        "geoMapViewer.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask for a Marketplace rating after you have opened a few files on two different days. At most 2 asks. Nothing is sent anywhere."
+        },
+        "geoMapViewer.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Sponsor and More free viewers links in the status line of the viewer. The change shows in files you open next. Nothing is sent anywhere."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "geoMapViewer.start",
+        "title": "Get started with the Map Viewer",
+        "description": "See GeoJSON, KML, GPX and shapefiles on a map without leaving VS Code, offline.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open a map file",
+            "description": "Click a .gpx, .kmz, .shp or .topojson file to open it on the map. For .geojson, .kml and .wkt, use the map button in the editor title bar, or right-click the file and pick Open in Map Viewer.\n[Find a GeoJSON file](command:workbench.action.quickOpen?%5B%22.geojson%22%5D)",
+            "media": {
+              "image": "images/countries-shapefile.png",
+              "altText": "A Natural Earth countries shapefile in the Map Viewer with the attribute table and the properties of one country."
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.quickOpen"
+            ]
+          },
+          {
+            "id": "inspect",
+            "title": "Table, properties and layers",
+            "description": "Click a feature to see its properties. The Table button shows every feature with a filter; click a row to zoom to it. KML folders are layers you can hide.",
+            "media": {
+              "markdown": "walkthrough/inspect.md"
+            }
+          },
+          {
+            "id": "gpx",
+            "title": "GPX tracks",
+            "description": "A GPX file shows distance, duration, moving time, elevation gain and an elevation profile for each track.",
+            "media": {
+              "markdown": "walkthrough/gpx.md"
+            }
+          },
+          {
+            "id": "crs",
+            "title": "Projected data and PNG export",
+            "description": "Shapefiles use their .prj file. For other data, type an EPSG code in the Coordinate system box. Export PNG saves the current view.\n[Open settings](command:workbench.action.openSettings?%5B%22geoMapViewer%22%5D)",
+            "media": {
+              "markdown": "walkthrough/crs.md"
+            },
+            "completionEvents": [
+              "onCommand:workbench.action.openSettings"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.js --production",
+    "test": "node scripts/build.js --production && node --test \"test/*.test.js\" \"test/*.test.mjs\"",
+    "package": "npm run build && npx -y @vscode/vsce package --no-dependencies -o dist/"
+  },
+  "devDependencies": {
+    "@tmcw/togeojson": "7.1.3",
+    "@types/vscode": "~1.90.0",
+    "@xmldom/xmldom": "0.9.12",
+    "esbuild": "0.28.2",
+    "fflate": "0.8.3",
+    "proj4": "2.22.0",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  },
+  "homepage": "https://github.com/theluckystrike/geo-map-viewer-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/theluckystrike/geo-map-viewer-vscode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/geo-map-viewer-vscode"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike"
+  }
+}
