@@ -1,8 +1,8 @@
 {
   "name": "zovo-geo-map-viewer",
   "displayName": "GeoJSON Viewer, KML Viewer & GPX Viewer (Map Preview, Shapefile)",
-  "description": "GeoJSON viewer, KML viewer and GPX viewer with a map preview in VS Code. Also opens shapefiles (SHP, zipped), KMZ, TopoJSON, WKT and CSV with lat/lon: feature table, properties, GPX distance and elevation profile, reprojection from .prj, PNG export. Free, no sign-in, works offline.",
-  "version": "0.1.0",
+  "description": "Offline map with a feature table and GPX elevation profile. GeoJSON viewer, KML viewer and GPX viewer with a map preview in VS Code. Also opens shapefiles (SHP, zipped), KMZ, TopoJSON, WKT and CSV with lat/lon; reprojection from .prj, PNG export. Free, no sign-in.",
+  "version": "0.1.1",
   "publisher": "zovo",
   "license": "MIT",
   "icon": "icon.png",

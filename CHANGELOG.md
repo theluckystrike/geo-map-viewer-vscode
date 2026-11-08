@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-11-08)
+
+- Short description only: the first line now says what the name does not (offline map, feature table, GPX elevation profile). No code change.
+
 ## 0.1.0 (2026-11-08)
 
 First release.
