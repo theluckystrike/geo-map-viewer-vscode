@@ -9,7 +9,7 @@ const { registerSupport, commandUris, showLinks } = require('./support');
 const VIEW_TYPE = 'geoMapViewer.map';
 // Same viewer, offered as "Open With" for text formats people also edit (GeoJSON, KML, WKT, JSON, CSV, ZIP).
 const VIEW_TYPE_OPTION = 'geoMapViewer.mapOption';
-const EXT_ID = 'zovo.geo-map-viewer';
+const EXT_ID = 'zovo.zovo-geo-map-viewer';
 const LIVE_MAX = 20 * MB; // live preview from unsaved editor text up to this size
 let rating = { success() {}, failure() {} };
 
